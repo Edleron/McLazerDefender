@@ -16,6 +16,13 @@ public class Player : MonoBehaviour
     private int paddingTop = 5;
     private int paddingBottom = 2;
 
+    private Shooter shooter;
+
+    private void Awake()
+    {
+        shooter = GetComponent<Shooter>();
+    }
+
     private void Start()
     {
         InitBounds();
@@ -45,5 +52,13 @@ public class Player : MonoBehaviour
     private void OnMove(InputValue value)
     {
         rawInput = value.Get<Vector2>();
+    }
+
+    private void OnFire(InputValue value)
+    {
+        if (shooter != null)
+        {
+            shooter.isFiring = value.isPressed;
+        }
     }
 }
