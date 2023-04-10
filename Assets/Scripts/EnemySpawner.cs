@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] WaveConfigSO currentWave;
+    [SerializeField] List<WaveConfigSO> waveConfigs;
+    [SerializeField] float timeBetweenWaves = 0.0f;
+    [SerializeField] bool isLooping;
+    private WaveConfigSO currentWave;
 
     private void Start()
     {
-        SpawnEnemies();
+        StartCoroutine(SpawnEnemies());
     }
 
     public WaveConfigSO GetCurrentWave()
@@ -16,15 +19,28 @@ public class EnemySpawner : MonoBehaviour
         return currentWave;
     }
 
-    private void SpawnEnemies()
+    IEnumerator SpawnEnemies()
     {
-        for (int i = 0; i < currentWave.GetEnemyCount(); i++)
+        // Todo -> for ve while döngülerinde koşul, döngü başlamadan önce kontrol edilir.
+        // Todo -> do while döngüsünde ise, bu kontrol her döngüden sonra gerçekleştirilir.
+        // Todo -> Operasyon mantığında do while döngüsü, koşul ne olursa olsun en az bir kere çalıştırılır.
+        do
         {
-            Instantiate(currentWave.GetEnemyPrefab(0),
-                        currentWave.GetStartingWayPoint().position,
-                        Quaternion.identity,
-                        transform);
-        }
-    }
+            foreach (WaveConfigSO wave in waveConfigs)
+            {
+                currentWave = wave;
+                for (int i = 0; i < currentWave.GetEnemyCount(); i++)
+                {
+                    Instantiate(currentWave.GetEnemyPrefab(0),
+                                currentWave.GetStartingWayPoint().position,
+                                Quaternion.identity,
+                                transform);
 
+                    yield return new WaitForSeconds(currentWave.GetRandomSpawnTime());
+                }
+            }
+
+            yield return new WaitForSeconds(timeBetweenWaves);
+        } while (isLooping);
+    }
 }
