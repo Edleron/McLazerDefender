@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: ac245d3a58d493140b8cd9181a7c6636
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Boba Cups
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 897043ed2a1819e499d8002b6af6a4a4, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
