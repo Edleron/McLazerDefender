@@ -28,7 +28,7 @@ https://edleron.com
 ```
 
 ```
-https://edleron.itch.io/lazerdefender
+https://edleron.itch.io/mc-lazer-defender
 
 ```
 
